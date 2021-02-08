@@ -1,0 +1,43 @@
+﻿@model List<SII.User>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "Layout";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<a class="btn btn-sm btn-primary" asp-action="Index">Пользователи</a>
+<a class="btn btn-sm btn-primary" asp-action="Lections">Лекции</a>
+<h1>Users</h1>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (SII.User u in Model)
+    {
+    <tr>
+        <td>@u.Id</td>
+        <td>@u.Name</td>
+        <td>
+            <a class="btn btn-sm btn-primary" asp-action="Correlation" asp-route-id="@u.Id">Пользователи с похожими вкусами</a>
+        </td>
+        <td>
+            <a class="btn btn-sm btn-primary" asp-action="Collaboration" asp-route-id="@u.Id">Рекоммендации на основе похожих пользователей</a>
+        </td>
+        <td>
+            <a class="btn btn-sm btn-primary" asp-action="Content" asp-route-id="@u.Id">Рекоммендации на основе оцененных лекций</a>
+        </td>
+        <td>
+            <a class="btn btn-sm btn-primary" asp-action="Hybrid" asp-route-id="@u.Id">Гибридная рекомендация</a>
+        </td>
+    </tr>
+    }
+</table>
